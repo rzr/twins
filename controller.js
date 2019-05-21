@@ -1,7 +1,7 @@
 var app = {
   pause: false,
   property: 'torso',
-  url: 'https://twins.glitch.me',
+  url: 'https://rzr-twins.glitch.me',
   suffix: '',
   useWs: false,
   wsUrl: 'ws://localhost:8888',
