@@ -9,8 +9,6 @@ var app = {
   verbose: false,
 };
 
-app.url = 'http://192.168.1.13:8888';
-
 let interval = null;
 let ws = null;
 
