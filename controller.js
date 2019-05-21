@@ -5,6 +5,8 @@ var app = {
   suffix: '',
   useWs: false,
   wsUrl: 'ws://localhost:8888',
+  delay: 500,
+  verbose: false,
 };
 
 app.url = 'http://192.168.1.13:8888';
@@ -14,16 +16,16 @@ let ws = null;
 
 function verbose(arg)
 {
-  console.log(arg);
+  if (app.verbose) {
+    console.log(arg);
+  }
 }
 
 function update(properties)
 {
   verbose(properties);
   document.title = properties;
-
   var robot = document.getElementById('robot');
-  
   for (var property of Object.keys(properties)) {
     robot.setAttribute('robot', property, properties[property]);
   }
@@ -39,10 +41,12 @@ function query()
         return response.json();
       }, (reason) => {
         verbose(reason);
-        app.url = String(window.location)
-          .substring(0, String(window.location).lastIndexOf("/"))
-          + '/json';
-        app.suffix = '/index.html';
+        if (false) {
+          app.url = String(window.location)
+            .substring(0, String(window.location).lastIndexOf("/"))
+            + '/json';
+          app.suffix = '/index.html';
+        }
         verbose(`log: Fallback to static: ${app.url}`);
       })
       .then((json) => {
@@ -55,7 +59,7 @@ function query()
 function poll(delay)
 {
   if (!delay) {
-    delay = 1000;
+    delay = app.delay;
   }
   verbose(`log: loop: waiting delay: ${delay}`);
   interval = setInterval(() => {
@@ -121,4 +125,4 @@ function toggle(status)
 
 setTimeout(function() {
  start();
-}, 1000);
+}, app.delay);
