@@ -1,11 +1,13 @@
+target_url?=https://rzr-twins.glitch.me
+
 base_url?=https://webthing-iotjs-robot.glitch.me/properties
 www_host?=192.168.1.12
 www_url?=http://${www_host}/~${USER}/${www_dir}
 www_dir?=d
-target_host?=192.168.1.13
+#target_host?=192.168.1.13
 #target_url?=http://${target_host}:8888
 make=make
-target_url?=https://rzr-twins.glitch.me
+
 
 test:
 	curl -X PUT -d '{ "Torso": -90 }'  ${base_url}/Torso
