@@ -106,3 +106,7 @@ demo: zero
 	${make} rule/webthing-iotjs/property/Shoulder value=45
 	${make} rule/webthing-iotjs/property/Arm value=10
 	${make} rule/webthing-iotjs/property/Arm value=-15
+
+start:
+	while true; do make demo ; done
+
