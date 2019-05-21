@@ -115,7 +115,6 @@ AFRAME.registerComponent('robot', {
         break;
       case 'Shoulder':
         rotation[0] = (properties[property] + 45 ) /2;
-        console.log(rotation[0]);
         break;
       case 'Arm':
         rotation[0] = - properties[property];
