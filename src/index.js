@@ -1,9 +1,9 @@
 AFRAME.registerComponent('robot', {
   schema: {
-    Torso: { type: 'number', default: -160},
-    Shoulder: { type: 'number', default: -45},
-    Arm: { type: 'number', default: -90},
-    Hand: { type: 'number', default: 40},
+    Torso: { type: 'number', default: 0},
+    Shoulder: { type: 'number', default: 0},
+    Arm: { type: 'number', default: 0},
+    Hand: { type: 'number', default: 0},
   },
  
   init: function() {
@@ -16,13 +16,15 @@ AFRAME.registerComponent('robot', {
     torso.appendChild(torsoBox);
     this.el.appendChild(torso);
 
+    var shoulderGroup = document.createElement('a-entity');
+    shoulderGroup.setAttribute('rotation', '-45 0 0');
+    shoulderGroup.setAttribute('position', "0 .5 0");
     var shoulder = document.createElement('a-entity');
     shoulder.setAttribute('id', 'Shoulder');
-    shoulder.setAttribute('position', "0 .5 0");
     var shoulderJunction = document.createElement('a-cylinder');
-    shoulderJunction.setAttribute('scale', ".4 2 .4");
+    shoulderJunction.setAttribute('scale', ".4 1 .4");
     shoulderJunction.setAttribute('rotation', "0 0 90");
-    shoulderJunction.setAttribute('material', { color: '#000' });
+    shoulderJunction.setAttribute('material', { color: '#AAA' });
     shoulder.appendChild(shoulderJunction);
     
     var shoulderBox = document.createElement('a-box');
@@ -30,11 +32,15 @@ AFRAME.registerComponent('robot', {
     shoulderBox.setAttribute('scale', ".7 6 .7");
     shoulderBox.setAttribute('position', "0 3 0");
     shoulder.appendChild(shoulderBox);
-    torso.appendChild(shoulder);
+    shoulderGroup.appendChild(shoulder);
+    torso.appendChild(shoulderGroup);
 
+    var armGroup = document.createElement('a-entity');
+    armGroup.setAttribute('rotation', '-90 0 0');
+    armGroup.setAttribute('position', "0 6 0");
     var arm = document.createElement('a-entity');
     arm.setAttribute('id', 'Arm');
-    arm.setAttribute('position', "0 6 0");
+
     var armJunction = document.createElement('a-cylinder');
     armJunction.setAttribute('scale', ".4 .71 .4");
     armJunction.setAttribute('rotation', "0 0 90");
@@ -42,13 +48,16 @@ AFRAME.registerComponent('robot', {
     arm.appendChild(armJunction);
     var armBox = document.createElement('a-box');
     armBox.setAttribute('material', { color: '#00F' });
-    armBox.setAttribute('scale', ".7 3 .7");
+    armBox.setAttribute('scale', ".4 3 .4");
     armBox.setAttribute('position', "0 1.5 0");
     arm.appendChild(armBox);
-    shoulder.appendChild(arm);
-
+    armGroup.appendChild(arm);
+    shoulder.appendChild(armGroup);
+    
     var hand = document.createElement('a-entity');
+    //hand.setAttribute('rotation', '-70 0 0');
     hand.setAttribute('position', "0 4 0");
+
     var handJunction = document.createElement('a-cylinder');
     handJunction.setAttribute('material', { color: '#0FF' });
     handJunction.setAttribute('scale', ".5 .8 .5");
@@ -71,6 +80,8 @@ AFRAME.registerComponent('robot', {
     palm.appendChild(nails);
     hand.appendChild(palm);
 
+    var handGroup = document.createElement('a-entity');
+    handGroup.setAttribute('rotation', '0 0 10');
     var handEntity = document.createElement('a-entity');
     handEntity.setAttribute('id', 'Hand');
     var thumb = document.createElement('a-torus');
@@ -86,12 +97,12 @@ AFRAME.registerComponent('robot', {
     nail.setAttribute('material', { color: '#F00'});
     thumb.appendChild(nail);
     handEntity.appendChild(thumb);
-    hand.appendChild(handEntity);
+    handGroup.appendChild(handEntity);
+    hand.appendChild(handGroup);
     arm.appendChild(hand);
     this.hand = handEntity;
   },
   update: function(old) {
-    console.log('update');
     var properties = this.data;
     for (var property of Object.keys(properties)) {
       var rotation = [ 0, 0, 0];
@@ -100,8 +111,15 @@ AFRAME.registerComponent('robot', {
         rotation[1] = properties[property];
         break;
       case "Hand":
-        rotation[2] = properties[property];
+        rotation[2] = - (4 * properties[property]) + 57;
         break;
+      case 'Shoulder':
+        rotation[0] = (properties[property] + 45 ) /2;
+        console.log(rotation[0]);
+        break;
+      case 'Arm':
+        rotation[0] = - properties[property];
+        break;        
       default:
         rotation[0] = properties[property];
         break;
