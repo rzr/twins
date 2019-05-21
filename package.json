@@ -1,11 +1,12 @@
 {
-  "name": "aframe-robot-component",
+  "name": "twins",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack src/index.js -o dist/aframe-robot-component.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack src/index.js -o dist/twins.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
