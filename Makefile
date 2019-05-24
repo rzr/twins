@@ -113,3 +113,5 @@ demo: zero
 start:
 	while true; do make demo ; done
 
+LICENSE: /usr/share/common-licenses/MPL-2.0
+	cp -a $< $@
