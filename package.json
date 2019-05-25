@@ -1,0 +1,30 @@
+{
+  "name": "twins",
+  "version": "0.0.0",
+  "description": "Digital twin PoC demo",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "node index"
+  },
+  "author": "Philippe Coval <p.coval@samsung.com> (https://www.npmjs.com/~rzr)",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rzr/twins.git"
+  },
+  "iotjs": {
+    "version": ">=1.0"
+  },
+  "keywords": [
+    "digitaltwin",
+    "iotjs-module"
+  ],
+  "bugs": {
+    "url": "https://github.com/rzr/twins/issues"
+  },
+  "homepage": "https://libraries.io/npm/twins",
+  "dependencies": {
+    "webthing-iotjs": "https://github.com/rzr/webthing-iotjs/"
+  },
+}
