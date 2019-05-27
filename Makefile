@@ -13,9 +13,11 @@ default: help
 	@echo "log: $@: $^"
 
 runtime?=iotjs
-webthing_url?=http://rzr-twins.glitch.me
+webthing_url?=http://${project}.glitch.me
 example_file=index.js
 run_args?=
+port?=8888
+target_url?=http://localhost:${port}
 
 iotjs_modules_dir?=${CURDIR}/iotjs_modules
 
@@ -38,6 +40,14 @@ iotjs/start: ${example_file} ${iotjs_modules_dirs}
 
 iotjs/modules: ${iotjs_modules_dirs}
 	ls $<
+
+iotjs/client:
+	curl -i ${target_url}
+	curl -i ${target_url}/properties
+
+iotjs/client/web:
+	curl -i ${webthing_url}
+	curl -i ${webthing_url}/properties
 
 LICENSE: /usr/share/common-licenses/MPL-2.0
 	cp -a $< $@
