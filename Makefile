@@ -12,12 +12,16 @@
 default: help
 	@echo "log: $@: $^"
 
+project?=twins
 runtime?=iotjs
 webthing_url?=http://${project}.glitch.me
 example_file=index.js
 run_args?=
 port?=8888
 target_url?=http://localhost:${port}
+
+lib_srcs?=$(wildcard *.js lib/*.js | sort | uniq)
+srcs?=${lib_srcs}
 
 iotjs_modules_dir?=${CURDIR}/iotjs_modules
 
@@ -26,6 +30,13 @@ webthing-iotjs_url?=https://github.com/rzr/webthing-iotjs
 webthing-iotjs_revision?=master
 webthing-iotjs_dir?=${iotjs_modules_dir}/webthing-iotjs
 iotjs_modules_dirs+=${webthing-iotjs_dir}
+
+deploy_modules_dir?=${CURDIR}/tmp/deploy/iotjs_modules
+deploy_module_dir?= ${deploy_modules_dir}/${project}
+deploy_dirs+= ${deploy_module_dir}
+deploy_dirs+= ${deploy_modules_dir}/webthing-iotjs
+deploy_srcs+= $(addprefix ${deploy_module_dir}/, ${srcs})
+
 
 %: ${runtime}/%
 	@echo "log: $@: $^"
@@ -49,6 +60,9 @@ iotjs/client/web:
 	curl -i ${webthing_url}
 	curl -i ${webthing_url}/properties
 
+deploy: ${deploy_srcs} ${deploy_dirs}
+	ls $<
+
 LICENSE: /usr/share/common-licenses/MPL-2.0
 	cp -a $< $@
 
@@ -56,3 +70,10 @@ ${webthing-iotjs_dir}: Makefile
 	git clone --recursive --depth 1 ${webthing-iotjs_url} -b ${webthing-iotjs_revision} $@
 	make -C $@ deploy deploy_modules_dir=${iotjs_modules_dir}
 
+${deploy_module_dir}/%: %
+	@echo "# TODO: minify: $< to $@"
+	install -d ${@D}
+	install $< $@
+
+${deploy_modules_dir}/webthing-iotjs: ${iotjs_modules_dir}/webthing-iotjs
+	make -C $< deploy deploy_modules_dir="${deploy_modules_dir}"
