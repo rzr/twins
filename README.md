@@ -1,5 +1,10 @@
 # WEB OF TWINS #
 
+## INTRODUCTION: ##
+
+[![Concept](https://image.slidesharecdn.com/web-of-twins-20190604rzr-190604205255/95/weboftwins20190604rzr-1-638.jpg)](http://www.slideshare.net/slideshow/embed_code/key/16GRRsNuiRCfa6#weboftwins20190604rzr# "weboftwins20190604rzr")
+
+
 ## USAGE: ##
 
 ```sh
