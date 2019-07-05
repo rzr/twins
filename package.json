@@ -1,6 +1,6 @@
 {
   "name": "twins",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Digital twin PoC demo",
   "main": "index.js",
   "scripts": {
