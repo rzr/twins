@@ -19,6 +19,7 @@ example_file=index.js
 run_args?=
 port?=8888
 target_url?=http://localhost:${port}
+export target_url
 
 lib_srcs?=$(wildcard *.js lib/*.js | sort | uniq)
 srcs?=${lib_srcs}
@@ -77,3 +78,29 @@ ${deploy_module_dir}/%: %
 
 ${deploy_modules_dir}/webthing-iotjs: ${iotjs_modules_dir}/webthing-iotjs
 	make -C $< deploy deploy_modules_dir="${deploy_modules_dir}"
+
+
+property/%:
+	curl ${target_url}/properties/${@F}
+	curl -X PUT -d '{ "${@F}": ${value} }' ${target_url}/properties/${@F}
+	sleep 2
+
+zero:
+	${MAKE} property/torso value=0
+	${MAKE} property/shoulder value=0
+	${MAKE} property/arm value=0
+	${MAKE} property/hand value=0
+
+demo: zero
+	${MAKE} property/hand value=0
+	${MAKE} property/hand value=20
+	${MAKE} property/arm value=15
+	${MAKE} property/shoulder value=-20
+	${MAKE} property/shoulder value=-40
+	${MAKE} property/shoulder value=-60
+	${MAKE} property/hand value=-5
+	${MAKE} property/shoulder value=-30
+	${MAKE} property/shoulder value=0
+	${MAKE} property/shoulder value=45
+	${MAKE} property/arm value=10
+	${MAKE} property/arm value=-15
