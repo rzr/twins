@@ -21,5 +21,5 @@ if (process && process.iotjs && process.iotjs.board) {
 }
 
 if (module.parent === null) {
- module.exports.start();
+  module.exports.start();
 }
