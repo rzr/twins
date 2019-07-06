@@ -1,0 +1,33 @@
+{
+  "name": "aframe-twins",
+  "version": "0.0.1",
+  "description": "Robot model rendered by A-Frame",
+  "main": "example.js",
+  "scripts": {
+    "start": "node example.js"
+  },
+  "author": "Philippe Coval <p.coval@samsung.com> (https://www.npmjs.com/~rzr)",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rzr/twins.git"
+  },
+  "iotjs": {
+    "version": ">=1.0"
+  },
+  "keywords": [
+    "aframe",
+    "aframe-component",
+    "motor",
+    "robot",
+    "robotic",
+    "servo"
+  ],
+  "bugs": {
+    "url": "https://github.com/rzr/twins/issues"
+  },
+  "homepage": "https://libraries.io/npm/twins",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
