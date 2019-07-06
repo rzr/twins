@@ -37,6 +37,13 @@ deploy_dirs+= ${deploy_module_dir}
 deploy_dirs+= ${deploy_modules_dir}/webthing-iotjs
 deploy_srcs+= $(addprefix ${deploy_module_dir}/, ${srcs})
 
+curl?=curl \
+ -H "Accept: application/json" \
+ -H "Content-type: application/json" \
+ ${curl_args}
+
+sleep_secs?=1
+
 
 %: ${runtime}/%
 	@echo "log: $@: $^"
@@ -80,9 +87,11 @@ ${deploy_modules_dir}/webthing-iotjs: ${iotjs_modules_dir}/webthing-iotjs
 
 
 property/%:
-	curl ${target_url}/properties/${@F}
-	curl -X PUT -d '{ "${@F}": ${value} }' ${target_url}/properties/${@F}
-	sleep 2
+	${curl} ${target_url}/properties/${@F}
+	@echo ""
+	${curl} -X PUT -d '{ "${@F}": ${value} }' ${target_url}/properties/${@F}
+	@echo ""
+	sleep ${sleep_secs}
 
 zero:
 	${MAKE} property/torso value=0
@@ -136,3 +145,6 @@ demo: zero
 	${MAKE} property/hand value=30
 	${MAKE} property/hand value=40
 	${MAKE} zero
+
+remote:
+	${MAKE} demo
