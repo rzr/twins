@@ -1,3 +1,14 @@
+// -*- mode: js; js-indent-level:2;  -*-
+// SPDX-License-Identifier: MPL-2.0
+
+/**
+ *
+ * Copyright 2018-present Samsung Electronics France SAS, and other contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
+ */
 AFRAME.registerComponent('robot', {
   schema: {
     torso: { type: 'number', default: 0},
@@ -5,7 +16,7 @@ AFRAME.registerComponent('robot', {
     arm: { type: 'number', default: 0},
     hand: { type: 'number', default: 0},
   },
- 
+
   init: function() {
     console.log(this.data);
     var torso = document.createElement('a-entity');
@@ -26,7 +37,7 @@ AFRAME.registerComponent('robot', {
     shoulderJunction.setAttribute('rotation', "0 0 90");
     shoulderJunction.setAttribute('material', { color: '#AAA' });
     shoulder.appendChild(shoulderJunction);
-    
+
     var shoulderBox = document.createElement('a-box');
     shoulderBox.setAttribute('material', { color: '#0F0' });
     shoulderBox.setAttribute('scale', ".7 6 .7");
@@ -53,7 +64,7 @@ AFRAME.registerComponent('robot', {
     arm.appendChild(armBox);
     armGroup.appendChild(arm);
     shoulder.appendChild(armGroup);
-    
+
     var hand = document.createElement('a-entity');
     //hand.setAttribute('rotation', '-70 0 0');
     hand.setAttribute('position', "0 4 0");
@@ -111,14 +122,14 @@ AFRAME.registerComponent('robot', {
         rotation[1] = properties[property];
         break;
       case "hand":
-        rotation[2] = - (4 * properties[property]) + 57;
+        rotation[2] = - (3 * properties[property]) + 75;
         break;
       case 'shoulder':
         rotation[0] = (properties[property] + 45 ) /2;
         break;
       case 'arm':
         rotation[0] = - properties[property];
-        break;        
+        break;
       default:
         rotation[0] = properties[property];
         break;
