@@ -90,16 +90,49 @@ zero:
 	${MAKE} property/arm value=0
 	${MAKE} property/hand value=0
 
-demo: zero
-	${MAKE} property/hand value=0
-	${MAKE} property/hand value=20
-	${MAKE} property/arm value=15
-	${MAKE} property/shoulder value=-20
-	${MAKE} property/shoulder value=-40
-	${MAKE} property/shoulder value=-60
-	${MAKE} property/hand value=-5
-	${MAKE} property/shoulder value=-30
+hand: # [0 45]
+	${MAKE} property/${@F} value=0
+	${MAKE} property/${@F} value=10
+	${MAKE} property/${@F} value=20
+	${MAKE} property/${@F} value=30
+	${MAKE} property/${@F} value=40
+	${MAKE} property/${@F} value=10
+	${MAKE} property/${@F} value=0
+	${MAKE} property/${@F} value=-5
+	${MAKE} property/${@F} value=0
+
+arm: # [-45 +45]
+	${MAKE} property/${@F} value=0
+	${MAKE} property/${@F} value=45
+	${MAKE} property/${@F} value=-45
+	${MAKE} property/${@F} value=0
+
+shoulder: #[ -45, 45]
+	${MAKE} property/shoulder value=-45
 	${MAKE} property/shoulder value=0
 	${MAKE} property/shoulder value=45
-	${MAKE} property/arm value=10
+	${MAKE} property/shoulder value=0
+
+demo: zero
+	${MAKE} property/hand value=40
 	${MAKE} property/arm value=-15
+	${MAKE} property/shoulder value=20
+	${MAKE} property/arm value=-20
+	${MAKE} property/shoulder value=45
+	${MAKE} property/hand value=20
+	${MAKE} property/hand value=0
+	${MAKE} property/hand value=-10
+	${MAKE} property/arm value=0
+	${MAKE} property/arm value=15
+	${MAKE} property/shoulder value=0
+	${MAKE} property/shoulder value=-45
+	${MAKE} property/shoulder value=0
+	${MAKE} property/arm value=-20
+	${MAKE} property/shoulder value=20
+	${MAKE} property/shoulder value=45
+	${MAKE} property/arm value=-20
+	${MAKE} property/hand value=10
+	${MAKE} property/hand value=20
+	${MAKE} property/hand value=30
+	${MAKE} property/hand value=40
+	${MAKE} zero
