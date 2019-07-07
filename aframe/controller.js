@@ -1,12 +1,13 @@
 var app = {
-  pause: false,
+  pause: 'no',
   property: 'hand',
-  url: 'http://twin.glitch.me',
+  url: localStorage.url || 'http://localhost:8888',
   suffix: '',
-  useWs: false,
-  wsUrl: 'ws://localhost:8888',
+  useWs: 'no',
+  wsUrl: localStorage.wsUrl || 'ws://localhost:8888',
   delay: 500,
-  verbose: false,
+  verbose: 'no',
+  bearer: localStorage.bearer
 };
 
 let interval = null;
@@ -14,13 +15,14 @@ let ws = null;
 
 function verbose(arg)
 {
-  if (app.verbose) {
+  if (app.verbose === 'yes') {
     console.log(arg);
   }
 }
 
 function update(properties)
 {
+  verbose('update: ');
   verbose(properties);
   document.title = properties;
   var robot = document.getElementById('robot');
@@ -61,30 +63,39 @@ function poll(delay)
   }
   verbose(`log: loop: waiting delay: ${delay}`);
   interval = setInterval(() => {
-    if (app.pause) {
+    if (app.pause === 'yes') {
       verbose(`log: stopping: ${app.pause}`);
       inverval = clearInterval(interval);
     }
     query();
-  }, delay);
+  }, Number(delay));
 }
 
 
 function start()
 {
   let wsUrl = app.wsUrl.value;
-  let useWebsockets = ("WebSocket" in window) && app.useWsl
 
   let searchParams = null;
   if (document.location.search) {
     searchParams = (new URL(document.location)).searchParams;
   }
   if (searchParams) {
-    for (var entry of searchParams.entries())
+    for (let entry of searchParams.entries())
       app[entry[0]] = entry[1];
   }
 
+  verbose(app);
+  for (let key of Object.keys(app)) {
+    localStorage[key] = String(app[key]);
+  }
+  
+  let useWebsockets = ("WebSocket" in window) && (app.useWs === 'yes');
   if (useWebsockets) {
+    let wsUrl = app.wsUrl;
+    if (app.bearer)
+      wsUrl += `?jwt=${app.bearer}`;
+    verbose(wsUrl);
     ws = new WebSocket(wsUrl);
     ws.onclose = function (evt) {
       /// CLOSE_ABNORMAL
@@ -93,7 +104,8 @@ function start()
       }
     }
     ws.onmessage = function (evt) {
-      if (app.pause) {
+      verbose(evt);
+      if (app.pause === 'yes') {
         ws.close();
       }
       update(JSON.parse(evt.data).data);
@@ -107,7 +119,7 @@ function start()
 
 function toggle(status)
 {
-  app.pause = status;
+  app.pause = (status) ? 'yes' : 'no';
   if (status) {
     start();
   } else {
@@ -122,5 +134,5 @@ function toggle(status)
 }
 
 setTimeout(function() {
- start();
-}, app.delay);
+  start();
+}, Number(app.delay));
