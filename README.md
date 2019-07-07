@@ -36,12 +36,12 @@ make demo
 
 Then twin can be visualized using:
 
-* http://rzr.github.io/twins/aframe/?url=http://localhost:8888
+* <http://rzr.github.io/twins/aframe/?url=http://localhost:8888>
 
 
 ## GUIDE: ##
 
-* https://github.com/rzr/twins/wiki/DigitalTwins
+* <https://github.com/rzr/twins/wiki/DigitalTwins>
 
 
 ## DEMO: ##
@@ -51,4 +51,4 @@ Then twin can be visualized using:
 
 ## RESOURCES: ##
 
-* https://purl.org/rzr/digitaltwins-webthings-iotjs-20190512rzr#
+* <https://purl.org/rzr/digitaltwins-webthings-iotjs-20190512rzr#>
