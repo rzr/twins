@@ -36,6 +36,7 @@ make demo
 
 Then twin can be visualized using:
 
+* [A-frame (./aframe/index.html) ](./aframe/index.html) rendering page
 * <http://rzr.github.io/twins/aframe/?url=http://localhost:8888>
 
 
