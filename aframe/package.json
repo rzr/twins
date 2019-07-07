@@ -4,6 +4,7 @@
   "description": "Robot model rendered by A-Frame",
   "main": "example.js",
   "scripts": {
+    "lint": "eslint --fix . || eslint .",
     "start": "node example.js"
   },
   "author": "Philippe Coval <p.coval@samsung.com> (https://www.npmjs.com/~rzr)",
@@ -28,6 +29,7 @@
   },
   "homepage": "https://libraries.io/npm/twins",
   "dependencies": {
+    "eslint": "^6.0.1",
     "express": "^4.16.4"
   }
 }
