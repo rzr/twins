@@ -41,7 +41,9 @@ Then twin can be visualized using:
 
 ## GUIDE: ##
 
-* <https://github.com/rzr/twins/wiki/DigitalTwins>
+Demo Howto and more insights at:
+
+* <https://github.com/rzr/webthing-iotjs/wiki/DigitalTwins>
 
 
 ## DEMO: ##
