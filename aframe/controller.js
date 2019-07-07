@@ -1,12 +1,24 @@
+// -*- mode: js; js-indent-level:2;  -*-
+// SPDX-License-Identifier: MPL-2.0
+
+/**
+ *
+ * Copyright 2018-present Samsung Electronics France SAS, and other contributors
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
+ */
+
 var app = {
   pause: 'no',
   property: 'hand',
-  url: localStorage.url || 'http://localhost:8888',
+  url: (localStorage.url || 'http://localhost:8888'),
   suffix: '',
-  useWs: 'no',
-  wsUrl: localStorage.wsUrl || 'ws://localhost:8888',
+  useWs: (localStorage.useWs || 'no'),
+  wsUrl: (localStorage.wsUrl || 'ws://localhost:8888'),
   delay: 500,
-  verbose: 'no',
+  verbose: (localStorage.verbose || 'no'),
   bearer: localStorage.bearer
 };
 
@@ -24,7 +36,7 @@ function update(properties)
 {
   verbose('update: ');
   verbose(properties);
-  document.title = properties;
+  document.title = JSON.stringify(properties);
   var robot = document.getElementById('robot');
   for (var property of Object.keys(properties)) {
     robot.setAttribute('robot', property, properties[property]);
@@ -33,39 +45,39 @@ function update(properties)
 
 function query()
 {
-    var property = app.property;
-    var url = `${app.url}/properties`;
-    verbose(`log: fetch: ${url}`);
-    fetch(url)
-      .then((response) => {
-        return response.json();
-      }, (reason) => {
-        verbose(reason);
-        if (false) {
-          app.url = String(window.location)
-            .substring(0, String(window.location).lastIndexOf("/"))
-            + '/json';
-          app.suffix = '/index.html';
-        }
-        verbose(`log: Fallback to static: ${app.url}`);
-      })
-      .then((json) => {
-        verbose(`log: payload: ${JSON.stringify(json)}`);
-        update(json);
-      });
+  var url = `${app.url}/properties`;
+  verbose(`log: fetch: ${url}`);
+  fetch(url)
+    .then((response) => {
+      return response.json();
+    }, (reason) => {
+      verbose(reason);
+      if (app.suffix && app.suffix.length()) {
+        app.url = String(window.location)
+          .substring(0, String(window.location).lastIndexOf("/"))
+          + '/json';
+        app.suffix = '/index.html';
+      }
+      verbose(`log: Fallback to static: ${app.url}`);
+    })
+    .then((json) => {
+      verbose(`log: payload: ${JSON.stringify(json)}`);
+      update(json);
+    });
 }
 
 
 function poll(delay)
 {
+  var that = this;
   if (!delay) {
     delay = app.delay;
   }
   verbose(`log: loop: waiting delay: ${delay}`);
-  interval = setInterval(() => {
+  this.interval = setInterval(() => {
     if (app.pause === 'yes') {
       verbose(`log: stopping: ${app.pause}`);
-      inverval = clearInterval(interval);
+      that.inverval = clearInterval(that.interval);
     }
     query();
   }, Number(delay));
@@ -74,8 +86,6 @@ function poll(delay)
 
 function start()
 {
-  let wsUrl = app.wsUrl.value;
-
   let searchParams = null;
   if (document.location.search) {
     searchParams = (new URL(document.location)).searchParams;
@@ -89,7 +99,7 @@ function start()
   for (let key of Object.keys(app)) {
     localStorage[key] = String(app[key]);
   }
-  
+
   let useWebsockets = ("WebSocket" in window) && (app.useWs === 'yes');
   if (useWebsockets) {
     let wsUrl = app.wsUrl;
