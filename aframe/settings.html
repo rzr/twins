@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- SPDX-License-Identifier: MPL-2.0 -->
+<!-- 
+     Copyright 2018-present Samsung Electronics France SAS, and other contributors
+     This Source Code Form is subject to the terms of the Mozilla Public
+     License, v. 2.0. If a copy of the MPL was not distributed with this
+     file, You can obtain one at http://mozilla.org/MPL/2.0/
+  -->
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="theme-color" content="#317EFB"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="WebThings"/>
+<title>WebThings</title>
+<link rel="icon" type="image/png" href="images/16x16/logo.png"/>
+<link rel="manifest" href="manifest.json" />
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+<div id="main" class="page">
+<div class="contents">
+<h1>Twins</h1>
+<form name="settings" id="settings">
+<p>
+<input type="button" id="start" value="Start"/>
+</p>
+<p>
+<input type="text" id="url" placeholder="http://gateway.local:8080"><br/>
+<input type="password" id="bearer" placeholder="Bearer Token (to be pasted here)"><br/>
+<input type="text" id="wsUrl" placeholder="ws://gateway.local:8080"><br/>
+</p>
+</form>
+</div>
+</div>
+</body>
+<script>
+const app = {};
+app.start = function() {
+  var list = document.querySelectorAll("#settings input")
+  for (var el of list) {
+    localStorage[el.id] = el.value;
+  }
+  windows.location.href = 'index.html';
+}
+
+console.log(localStorage);
+for (var key of Object.keys(localStorage)) {
+  var el = document.getElementById(key);
+  if (el) {
+    el.value = localStorage[key];
+  }
+}
+
+document.getElementById('start').addEventListener('click', function() {
+  app.start();
+});
+</script>
+</html>
