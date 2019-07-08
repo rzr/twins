@@ -7,7 +7,7 @@
  *
  * This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
- * file, You can obtain one at http://mozilla.org/MPL/2.0/.*
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/
  */
 
 var app = {
@@ -15,7 +15,7 @@ var app = {
   property: 'hand',
   url: (localStorage.url || 'http://localhost:8888'),
   suffix: '',
-  useWs: (localStorage.useWs || 'no'),
+  useWs: (localStorage.useWs || 'yes'),
   wsUrl: (localStorage.wsUrl || 'ws://localhost:8888'),
   delay: 500,
   verbose: (localStorage.verbose || 'no'),
