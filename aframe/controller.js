@@ -63,6 +63,12 @@ function query()
     .then((json) => {
       verbose(`log: payload: ${JSON.stringify(json)}`);
       update(json);
+    })
+    .catch((err) => {
+      console.error(err);
+      if (confirm('Error: Connection issue, Please update settings')) {
+        window.location.href = 'settings.html';
+      }
     });
 }
 
