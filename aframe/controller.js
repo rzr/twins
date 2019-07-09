@@ -19,7 +19,8 @@ var app = {
   wsUrl: (localStorage.wsUrl || 'ws://localhost:8888'),
   delay: 500,
   verbose: (localStorage.verbose || 'no'),
-  bearer: localStorage.bearer
+  bearer: localStorage.bearer,
+  root: localStorage.root || 'robot'
 };
 
 let interval = null;
@@ -37,9 +38,9 @@ function update(properties)
   verbose('update: ');
   verbose(properties);
   document.title = JSON.stringify(properties);
-  var robot = document.getElementById('robot');
+  var root = document.getElementById(app.root);
   for (var property of Object.keys(properties)) {
-    robot.setAttribute('robot', property, properties[property]);
+    root.setAttribute(app.root, property, properties[property]);
   }
 }
 
