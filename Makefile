@@ -130,7 +130,6 @@ demo: zero
 	${MAKE} property/shoulder value=45
 	${MAKE} property/hand value=20
 	${MAKE} property/hand value=0
-	${MAKE} property/hand value=-10
 	${MAKE} property/arm value=0
 	${MAKE} property/arm value=15
 	${MAKE} property/shoulder value=0
