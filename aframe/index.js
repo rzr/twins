@@ -18,7 +18,6 @@ AFRAME.registerComponent('robot', {
   },
 
   init: function() {
-    console.log(this.data);
     var torso = document.createElement('a-entity');
     torso.setAttribute('id', 'torso');
     var torsoBox = document.createElement('a-box');
@@ -145,9 +144,5 @@ AFRAME.registerComponent('robot', {
     }
   },
   change: function(properties) {
-    console.log(properties);
   }
-
 });
-
-console.log('# index.js');
