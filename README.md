@@ -55,8 +55,7 @@ npm start 8042
 
 ### USING GLITCH: ###
 
-http://twins.thing.cloudns.org/aframe/
-
+* <http://rzr.github.io/twins/aframe>
 * <http://rzr.github.io/twins/aframe/?url=https://twins.glitch.me>
 
 
