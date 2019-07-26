@@ -53,6 +53,17 @@ help:
 	@echo "# Usage:"
 	@echo "# make runtime=${runtime} start"
 
+
+modules: ${runtime}/modules
+	@echo "log: $@: $^"
+
+node/modules: package.json
+	npm install
+
+node/start: ${example_file} modules
+	${@D} $< ${run_args}
+
+
 iotjs/start: ${example_file} ${iotjs_modules_dirs}
 	iotjs $< ${run_args}
 
