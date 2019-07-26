@@ -17,6 +17,7 @@ Web Of Twins proof of concept
 
 ## USAGE: ##
 
+### USING IOT.JS: ###
 
 ```sh
 make start
@@ -40,6 +41,25 @@ Then twin can be visualized using:
 * <http://rzr.github.io/twins/aframe/?url=http://localhost:8888>
 
 
+### USING NODE.JS: ###
+
+Usage is straightforward:
+
+```sh
+npm install
+npm start 8042
+#| > node index
+#| Listening:
+#| http://localhost:8842/
+```
+
+### USING GLITCH: ###
+
+http://twins.thing.cloudns.org/aframe/
+
+* <http://rzr.github.io/twins/aframe/?url=https://twins.glitch.me>
+
+
 ## GUIDE: ##
 
 Demo Howto and more insights at:
@@ -55,3 +75,4 @@ Demo Howto and more insights at:
 ## RESOURCES: ##
 
 * <https://purl.org/rzr/digitaltwins-webthings-iotjs-20190512rzr#>
+* <https://purl.org/aframe-webthing>
