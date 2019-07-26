@@ -33,6 +33,6 @@
   },
   "homepage": "https://libraries.io/npm/twins",
   "dependencies": {
-    "webthing-iotjs": "^0.11.2-1"
+    "webthing-iotjs": "^0.12.0"
   }
 }
