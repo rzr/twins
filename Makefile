@@ -24,12 +24,13 @@ export target_url
 lib_srcs?=$(wildcard *.js lib/*.js | sort | uniq)
 srcs?=${lib_srcs}
 
-iotjs_modules_dir?=${CURDIR}/iotjs_modules
+iotjs_modules_dir ?= ${CURDIR}/iotjs_modules
+export iotjs_modules_dir
 
-webthing-iotjs_url?=https://github.com/rzr/webthing-iotjs
-webthing-iotjs_revision?=webthing-iotjs-0.12.0
-webthing-iotjs_dir?=${iotjs_modules_dir}/webthing-iotjs
-iotjs_modules_dirs+=${webthing-iotjs_dir}
+webthing-iotjs_url ?= https://github.com/rzr/webthing-iotjs
+webthing-iotjs_revision ?= webthing-iotjs-0.12.1-1
+webthing-iotjs_dir ?= ${iotjs_modules_dir}/webthing-iotjs
+iotjs_modules_dirs += ${webthing-iotjs_dir}
 
 deploy_modules_dir?=${CURDIR}/tmp/deploy/iotjs_modules
 deploy_module_dir?= ${deploy_modules_dir}/${project}
@@ -48,11 +49,22 @@ sleep_secs?=1
 %: ${runtime}/%
 	@echo "log: $@: $^"
 
+run: ${runtime}/start
+	@echo "log: $@: $^"
 
 help:
 	@echo "# Usage:"
 	@echo "# make runtime=${runtime} start"
 
+setup: Makefile
+	@echo "# log: $@: $^"
+	@iotjs -h 2>&1 | grep -o 'Usage: iotjs' > /dev/null || echo "Error: iotjs not usable"
+
+check:
+	@echo "TODO: implements $@"
+
+test:
+	@echo "TODO: implements $@"
 
 modules: ${runtime}/modules
 	@echo "log: $@: $^"
@@ -67,8 +79,6 @@ node/start: ${example_file} modules
 iotjs/start: ${example_file} ${iotjs_modules_dirs}
 	iotjs $< ${run_args}
 
-iotjs/modules: ${iotjs_modules_dirs}
-	ls $<
 
 iotjs/client:
 	curl -i ${target_url}
@@ -78,15 +88,24 @@ iotjs/client/web:
 	curl -i ${webthing_url}
 	curl -i ${webthing_url}/properties
 
-deploy: ${deploy_srcs} ${deploy_dirs}
-	ls $<
 
 LICENSE: /usr/share/common-licenses/MPL-2.0
 	cp -a $< $@
 
+
+iotjs/modules: ${iotjs_modules_dirs}
+	ls $^
+
 ${webthing-iotjs_dir}: Makefile
-	git clone --recursive --depth 1 ${webthing-iotjs_url} -b ${webthing-iotjs_revision} $@
-	make -C $@ deploy deploy_modules_dir=${iotjs_modules_dir}
+	@echo "log: $@: $^"
+	git clone --recursive --depth=1 \
+ --branch "${webthing-iotjs_revision}" \
+ "${webthing-iotjs_url}" \
+ "$@"
+	${MAKE} -C $@ ${runtime}/modules
+
+deploy: ${deploy_srcs} ${deploy_dirs}
+	ls $<
 
 ${deploy_module_dir}/%: %
 	@echo "# TODO: minify: $< to $@"
@@ -94,8 +113,7 @@ ${deploy_module_dir}/%: %
 	install $< $@
 
 ${deploy_modules_dir}/webthing-iotjs: ${iotjs_modules_dir}/webthing-iotjs
-	make -C $< deploy deploy_modules_dir="${deploy_modules_dir}"
-
+	make -C $< deploy deploy_modules_dir="${deploy_modules_dir}" project="${@F}"
 
 property/%:
 	${curl} ${target_url}/properties/${@F}
