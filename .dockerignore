@@ -1,0 +1,12 @@
+# .dockerignore
+Dockerfile
+.git/
+
+# .gitignore
+**/iotjs_modules
+**/node_modules
+**/tmp
+*.swp
+*.tgz
+*.tmp
+*~
