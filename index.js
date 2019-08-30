@@ -14,7 +14,7 @@ var console = require('console');
 var log = console.log || function () {};
 var verbose = console.log || function () {};
 
-if (process && process.iotjs && process.iotjs.board) {
+if (process && process.iotjs && process.iotjs.board && process.iotjs.board !== 'generic') {
   module.exports = require('lib/index');
 } else {
   module.exports = require('./lib/simulator/index.js');
