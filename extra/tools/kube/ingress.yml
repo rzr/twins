@@ -1,0 +1,12 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: twins
+spec:
+  rules:
+  - host: twins.localhost
+    http:
+      paths:
+      - backend:
+          serviceName: twins
+          servicePort: 8888
