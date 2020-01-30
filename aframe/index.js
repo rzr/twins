@@ -133,16 +133,15 @@ AFRAME.registerComponent('robot', {
         rotation[0] = properties[property];
         break;
       }
-    }
-    var el = document.getElementById(property);
-    if (!el || !el.object3D)
-      throw "Null: " + property;
-
-    el.object3D.rotation.set(
-      THREE.Math.degToRad(rotation[0]),
-      THREE.Math.degToRad(rotation[1]),
-      THREE.Math.degToRad(rotation[2]))
-  },
+      var el = document.getElementById(property);
+      if (!el || !el.object3D)
+        throw "Null: " + property;
+      el.object3D.rotation.set(
+        THREE.Math.degToRad(rotation[0]),
+        THREE.Math.degToRad(rotation[1]),
+        THREE.Math.degToRad(rotation[2]));
+      }
+    },
   change: function(properties) {
   }
 });
