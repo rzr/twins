@@ -58,6 +58,24 @@ npm start 8042
 * <http://rzr.github.io/twins/aframe>
 * <http://rzr.github.io/twins/aframe/?url=https://twins.glitch.me>
 
+### USING MOZILLA WEBTHING GATEWAY: ###
+
+* Issue token
+
+```sh
+cd aframe
+npm install && PORT=42088 npm start
+
+url='http://localhost:42088/?'
+httpUrl='https://rzr.mozilla-iot.org/things/http---192.100.0.13-888'
+useWs="false"
+bearer='eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjI0YWZiMGI4LTdlMDktNDgzYy1iMTc4LTkyNDBjMjQxMWMxNiJ9.eyJjbGllbnRfaWQiOiJsb2NhbC10b2tlbiIsInJvbGUiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZSI6Ii90aGluZ3M6cmVhZHdyaXRlIiwiaWF0IjoxNTgwNDA1NDkyLCJpc3MiOiJodHRwczovL3J6ci5tb3ppbGxhLWlvdC5vcmcifQ.9OoC503xdppFBEKMKQoXBnK5RbamLuWo0hZg2evdImRUXwVEovfbhAqHFCwCFGyADYKpT8mTWOzlMKZ_ahddoA'
+url="$url&url=$httpUrl"
+url="$url&useWs=$useWs"
+url="$url&bearer=$bearer"
+www-browser "$url"
+```
+
 
 ## GUIDE: ##
 
