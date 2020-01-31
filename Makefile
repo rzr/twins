@@ -176,3 +176,20 @@ demo: zero
 
 remote:
 	${MAKE} demo
+
+devel:
+	xterm -e "make start runtime=node" &
+	cd aframe && \
+ npm install && \
+ xterm -e "PORT=42088 npm start"
+
+
+rule/back:
+	${MAKE} property/shoulder value=-45
+	${MAKE} property/arm value=45
+
+
+rule/front:
+	${MAKE} property/arm value=-45
+	${MAKE} property/shoulder value=45
+
