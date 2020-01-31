@@ -1,6 +1,6 @@
 {
   "name": "aframe-twins",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Robot model rendered by A-Frame",
   "main": "example.js",
   "scripts": {
