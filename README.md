@@ -91,5 +91,9 @@ Demo Howto and more insights at:
 
 ## RESOURCES: ##
 
+* <http://purl.org/rzr/presentations#>
+* <https://fosdem.org/2020/schedule/event/iotnuttx/#>
 * <https://purl.org/rzr/digitaltwins-webthings-iotjs-20190512rzr#>
-* <https://purl.org/aframe-webthing>
+* <https://purl.org/aframe-webthing#>
+* <https://github.com/rzr/aframe-webthing#>
+* <https://github.com/sponsors/rzr/#>
