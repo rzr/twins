@@ -17,9 +17,13 @@ runtime?=iotjs
 webthing_url?=http://${project}.glitch.me
 example_file=index.js
 run_args?=
-port?=8888
-target_url?=http://localhost:${port}
+target_port?=8888
+target_host?=localhost
+target_url?=http://${target_host}:${target_port}
 export target_url
+simulator_port=42088
+simulator_host?=localhost
+simulator_url?=http://${target_host}:${simulator_port}/?useWs=no
 
 lib_srcs?=$(wildcard *.js lib/*.js | sort | uniq)
 srcs?=${lib_srcs}
@@ -122,6 +126,9 @@ property/%:
 	@echo ""
 	sleep ${sleep_secs}
 
+properties:
+	${curl} -i ${target_url}/properties
+
 zero:
 	${MAKE} property/torso value=0
 	${MAKE} property/shoulder value=0
@@ -177,12 +184,19 @@ demo: zero
 remote:
 	${MAKE} demo
 
-devel:
-	xterm -e "make start runtime=node" &
-	cd aframe && \
- npm install && \
- xterm -e "PORT=42088 npm start"
+simulate:
+	${MAKE} start runtime=node
 
+view: aframe
+	cd $< && \
+ npm install && \
+ PORT=${simulator_port} npm start
+
+devel:
+	xterm -e "make simulate" &
+	xterm -e "make view" &
+	x-www-browser ${simulator_url} &
+	make rule/front rule/back
 
 rule/back:
 	${MAKE} property/shoulder value=-45
