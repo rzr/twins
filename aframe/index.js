@@ -34,7 +34,7 @@ AFRAME.registerComponent('robot', {
     var shoulderJunction = document.createElement('a-cylinder');
     shoulderJunction.setAttribute('scale', ".4 1 .4");
     shoulderJunction.setAttribute('rotation', "0 0 90");
-    shoulderJunction.setAttribute('material', { color: '#AAA' });
+    shoulderJunction.setAttribute('material', { color: '#FA0' });
     shoulder.appendChild(shoulderJunction);
 
     var shoulderBox = document.createElement('a-box');
@@ -54,7 +54,7 @@ AFRAME.registerComponent('robot', {
     var armJunction = document.createElement('a-cylinder');
     armJunction.setAttribute('scale', ".4 .71 .4");
     armJunction.setAttribute('rotation', "0 0 90");
-    armJunction.setAttribute('material', { color: '#AAF' });
+    armJunction.setAttribute('material', { color: '#FA0' });
     arm.appendChild(armJunction);
     var armBox = document.createElement('a-box');
     armBox.setAttribute('material', { color: '#00F' });
@@ -65,11 +65,11 @@ AFRAME.registerComponent('robot', {
     shoulder.appendChild(armGroup);
 
     var hand = document.createElement('a-entity');
-    //hand.setAttribute('rotation', '-70 0 0');
+    hand.setAttribute('rotation', '0 180 0');
     hand.setAttribute('position', "0 4 0");
 
     var handJunction = document.createElement('a-cylinder');
-    handJunction.setAttribute('material', { color: '#0FF' });
+    handJunction.setAttribute('material', { color: '#FA0' });
     handJunction.setAttribute('scale', ".5 .8 .5");
     handJunction.setAttribute('position', "0 -1 0");
     hand.appendChild(handJunction); //TODO
@@ -124,7 +124,7 @@ AFRAME.registerComponent('robot', {
         rotation[2] = - (3 * properties[property]) + 75;
         break;
       case 'shoulder':
-        rotation[0] = (properties[property] + 45 ) /2;
+        rotation[0] = (-properties[property] + 45);
         break;
       case 'arm':
         rotation[0] = - properties[property];
