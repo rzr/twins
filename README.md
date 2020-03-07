@@ -93,7 +93,10 @@ Demo Howto and more insights at:
 
 * <http://purl.org/rzr/presentations#>
 * <https://fosdem.org/2020/schedule/event/iotnuttx/#>
+* <https://fosdem.org/2020/schedule/event/web_of_twins/>
 * <https://purl.org/rzr/digitaltwins-webthings-iotjs-20190512rzr#>
 * <https://purl.org/aframe-webthing#>
 * <https://github.com/rzr/aframe-webthing#>
 * <https://github.com/sponsors/rzr/#>
+* <https://hacks.mozilla.org/2019/03/connecting-real-things-to-virtual-worlds-using-web/>
+* <https://github.com/jerryscript-project/iotjs-modules/pull/5>
